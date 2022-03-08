@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <mat-card>
+                <div class="container text-center offset-md-3">
+                    <img src="../../../assets/loginLogo.jpg" class="img-circular" style="width: 200px; height: 150px;">
+                </div>
+                <h1 class="text-center text-primary">Login Here!!!</h1>
+
+                <form [formGroup]="userLogin" (ngSubmit)="onSubmit()">
+                    <!-- username field -->
+                    <mat-form-field class="w-100 form-group" appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input type="text" matInput placeholder="Enter here" formControlName="username" required>
+                        <mat-hint>Username must be unique.</mat-hint>
+                    </mat-form-field>
+                    <span *ngIf="username?.invalid && username?.touched"
+                        class="alert-danger form-control is-invalid">Please
+                        enter a Username </span>
+
+                    <!-- password field -->
+                    <mat-form-field class="w-100 form-group" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput placeholder="Enter here" formControlName="password" required>
+                    </mat-form-field>
+                    <span *ngIf="password?.invalid && password?.touched"
+                        class="alert-danger form-control is-invalid">Please
+                        enter password.</span>
+
+                    <div class="container text-center">
+                        <button type="submit" mat-raised-button color="primary"
+                            [disabled]="!userLogin?.valid">Login</button>
+                        <button class="mx-2" mat-raised-button color="accent" (click)="clear()">Reset</button>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

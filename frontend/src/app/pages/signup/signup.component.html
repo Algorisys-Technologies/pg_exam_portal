@@ -1,0 +1,96 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <mat-card>
+                <div class="container text-center offset-md-4">
+                    <img src="../../../assets/signupLogo.jpg" class="img-circular" style="width: 100px;height: 100px;">
+                </div>
+                <h1 class="text-center text-primary">Register Here!!!</h1>
+
+                <form [formGroup]="userRegister" (ngSubmit)="onSubmit()">
+                    <!-- username field -->
+                    <mat-form-field class="w-100 form-group" appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input type="text" matInput placeholder="Enter here" formControlName="username" required>
+                        <mat-hint>Username must be unique.</mat-hint>
+                    </mat-form-field>
+                    <span *ngIf="username?.invalid && username?.touched"
+                        class="alert-danger form-control is-invalid">Please
+                        enter a Username </span>
+
+                    <!-- password field -->
+                    <mat-form-field class="w-100 form-group" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput placeholder="Enter here" formControlName="password" required>
+                    </mat-form-field>
+                    <span *ngIf="password?.invalid && password?.touched"
+                        class="alert-danger form-control is-invalid">Please
+                        enter password.</span>
+
+                    <!--confirm password field -->
+                    <mat-form-field class="w-100 form-group" appearance="outline">
+                        <mat-label>Confirm Password</mat-label>
+                        <input type="password" matInput placeholder="Enter here" formControlName="confirmpassword"
+                            required>
+                    </mat-form-field>
+                    <span *ngIf="confirmpassword?.invalid && confirmpassword?.touched"
+                        class="alert-danger form-control is-invalid">Please enter confirmpassword.</span>
+
+                    <!-- firstname field -->
+                    <mat-form-field class="w-100 form-group" appearance="outline">
+                        <mat-label>First Name</mat-label>
+                        <input type="text" matInput placeholder="Enter here" formControlName="firstName" required>
+                    </mat-form-field>
+                    <span *ngIf="firstName?.invalid && firstName?.touched"
+                        class="alert-danger form-control is-invalid">Please enter a First Name.</span>
+
+                    <!-- lastname field -->
+                    <mat-form-field class="w-100 form-group" appearance="outline">
+                        <mat-label>Last Name</mat-label>
+                        <input type="text" matInput placeholder="Enter here" formControlName="lastName" required>
+                    </mat-form-field>
+                    <span *ngIf="lastName?.invalid && lastName?.touched"
+                        class="alert-danger form-control is-invalid">Please
+                        enter a Last Name.</span>
+
+                    <!-- email field -->
+                    <mat-form-field class="w-100 form-group" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input type="email" matInput placeholder="Enter here" formControlName="email" required>
+                    </mat-form-field>
+                    <span *ngIf="email?.errors?.required && email?.touched"
+                        class="alert-danger form-control is-invalid">Please enter a email.</span>
+                    <span *ngIf="email?.errors?.pattern && email?.touched"
+                        class="alert-danger form-control is-invalid">Please write valid email!</span>
+
+                    <!-- phone field -->
+                    <mat-form-field class="w-100 form-group" appearance="outline">
+                        <mat-label>Phone Number</mat-label>
+                        <input type="text" matInput placeholder="Enter here" formControlName="phone" required>
+                    </mat-form-field>
+                    <span *ngIf="phone?.errors?.required && phone?.touched"
+                        class="alert-danger form-control is-invalid">Please
+                        enter a Phone Number</span>
+                    <span *ngIf="phone?.errors?.pattern && phone?.touched" class="alert-danger form-control is-invalid">
+                        Please enter numeric value!
+                    </span>
+                    <span *ngIf="phone?.errors?.minlength && phone?.touched"
+                        class="alert-danger form-control is-invalid">
+                        phone number must be contains 10 digits!
+                    </span>
+                    <span *ngIf="phone?.errors?.maxlength && phone?.touched"
+                        class="alert-danger form-control is-invalid">
+                        phone number contains only 10 digits!
+                    </span>
+
+
+                    <div class=" container text-center">
+                        <button type="submit" mat-raised-button color="primary"
+                            [disabled]="!userRegister?.valid">Register</button>
+                        <button class="mx-2" mat-raised-button color="accent" (click)="clear()">Reset</button>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

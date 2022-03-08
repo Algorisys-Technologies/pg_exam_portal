@@ -1,0 +1,65 @@
+package com.exam.controller;
+
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.exam.model.exam.Category;
+import com.exam.model.exam.Quiz;
+import com.exam.service.QuizService;
+
+@RestController
+@RequestMapping("/quiz")
+public class QuizController {
+	@Autowired
+	private QuizService quizService;
+
+	// add Quiz
+	@PostMapping("/")
+	public ResponseEntity<Quiz> addQuiz(@RequestBody Quiz quiz) {
+		return ResponseEntity.ok(this.quizService.addQuiz(quiz));
+	}
+
+	// update Quiz
+	@PutMapping("/")
+	public ResponseEntity<Quiz> updateQuiz(@RequestBody Quiz quiz) {
+		return ResponseEntity.ok(this.quizService.updateQuiz(quiz));
+	}
+
+	// get all quizzes
+	@GetMapping("/")
+	public ResponseEntity<Set<Quiz>> getQuizzes() {
+		return ResponseEntity.ok(this.quizService.getQuizzes());
+	}
+
+	// get single quiz
+	@GetMapping("/{quizId}")
+	public ResponseEntity<Quiz> getQuiz(@PathVariable("quizId") String quizId) {
+		return ResponseEntity.ok(this.quizService.getQuiz(quizId));
+	}
+
+	// delete quiz
+	@DeleteMapping("/{quizId}")
+	public void deleteQuiz(@PathVariable("quizId") String quizId) {
+		this.quizService.deleteQuiz(quizId);
+	}
+
+	// get quiz based on category
+	@GetMapping("/category/{cid}")
+	public List<Quiz> getQuizzesOfCategory(@PathVariable("cid") String cid) {
+		Category category = new Category();
+		category.setCid(cid);
+		return this.quizService.getQuizzesOfCategory(category);
+	}
+
+}

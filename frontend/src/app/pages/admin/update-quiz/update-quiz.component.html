@@ -1,0 +1,80 @@
+<mat-card>
+    <h1>Update Quiz</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form [formGroup]="editQuizForm" (ngSubmit)="onSubmit()">
+                    <!-- Title field -->
+                    <mat-form-field appearance="outline" class="w-100 form-group">
+                        <mat-label>Title</mat-label>
+                        <input type="text" matInput placeholder="Enter Title here" formControlName="title" required>
+                    </mat-form-field>
+                    <span *ngIf="title?.invalid && title?.touched" class="alert-danger form-control is-invalid">Please
+                        Enter a Title
+                    </span>
+
+                    <!-- description field -->
+                    <mat-form-field appearance="outline" class="w-100 form-group">
+                        <mat-label>Description</mat-label>
+                        <textarea type="text" rows="5" matInput placeholder="Enter Description here"
+                            formControlName="description" required>
+                        </textarea>
+                    </mat-form-field>
+                    <span *ngIf="description?.invalid && description?.touched"
+                        class="alert-danger form-control is-invalid">Please Enter a Description
+                    </span>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- max marks -->
+                            <mat-form-field appearance="outline" class="w-100 form-group">
+                                <mat-label>Maximum Marks</mat-label>
+                                <input type="number" matInput placeholder="Enter Maximum Marks here"
+                                    formControlName="maxMarks" required>
+                            </mat-form-field>
+                            <span *ngIf="maxMarks?.invalid && maxMarks?.touched"
+                                class="alert-danger form-control is-invalid">Please Enter a Maximum Marks
+                            </span>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- number of question to be shown -->
+                            <mat-form-field appearance="outline" class="w-100 form-group">
+                                <mat-label>Number of questions</mat-label>
+                                <input type="number" matInput placeholder="Enter Number of questions here"
+                                    formControlName="numberOfQuestions" required>
+                            </mat-form-field>
+                            <span *ngIf="numberOfQuestions?.invalid && numberOfQuestions?.touched"
+                                class="alert-danger form-control is-invalid">Please Enter Number of questions
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- active field -->
+                    <mat-slide-toggle class="mt-2" formControlName="active">publish me</mat-slide-toggle><br>
+
+                    <!-- select category -->
+                    <mat-form-field appearance="outline" class="mt-4 w-100">
+                        <mat-label>Categories</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option *ngFor="let c of categories" [value]="c?.cid">
+                                {{c.title}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <span *ngIf="category?.invalid && category?.touched"
+                        class="alert-danger form-control is-invalid">Please select the category
+                    </span>
+
+                    <div class="container text-center mt-2">
+                        <button mat-mini-fab color='primary' type="submit">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-mini-fab color='warn' class="mx-2" (click)="clear()">
+                            <mat-icon>clear</mat-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</mat-card>

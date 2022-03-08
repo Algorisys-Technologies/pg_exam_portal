@@ -1,0 +1,106 @@
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <h1>Add Question to <b>{{qTitle}}</b></h1>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-subtitle>
+                        Enter the detail of the new Question
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]="addQuestion" (ngSubmit)="onSubmit()" class="mt-2">
+
+                        <!-- content field -->
+                        <mat-form-field appearance="outline" class="w-100 form-group">
+                            <mat-label>Write Question Content*</mat-label>
+                            <textarea type="text" rows="5" matInput placeholder="Enter content here"
+                                formControlName="content">
+                            </textarea>
+                        </mat-form-field>
+                        <span *ngIf="content?.invalid && content?.touched "
+                            class="alert-danger form-control is-invalid">Please Enter a content
+                        </span>
+                        <span *ngIf='content?.dirty && (content?.value).trim()==""'
+                            class="alert-danger form-control is-invalid">Please Enter a content 
+                        </span>
+
+                        <!-- options -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline" class='w-100'>
+                                    <mat-label>Enter Option1*</mat-label>
+                                    <input type="text" matInput placeholder="Enter option1 here"
+                                        formControlName="option1">
+                                </mat-form-field>
+                                <span *ngIf="option1?.invalid && option1?.touched"
+                                    class="alert-danger form-control is-invalid">Please Enter a option1
+                                </span>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline" class='w-100'>
+                                    <mat-label>Enter Option2*</mat-label>
+                                    <input type="text" matInput placeholder="Enter option2 here"
+                                        formControlName="option2">
+                                </mat-form-field>
+                                <span *ngIf="option2?.invalid && option2?.touched"
+                                    class="alert-danger form-control is-invalid">Please Enter a option2
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline" class='w-100'>
+                                    <mat-label>Enter Option3</mat-label>
+                                    <input type="text" matInput placeholder="Enter option3 here"
+                                        formControlName="option3">
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline" class='w-100'>
+                                    <mat-label>Enter Option4</mat-label>
+                                    <input type="text" matInput placeholder="Enter option4 here"
+                                        formControlName="option4">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <!-- answer -->
+                        <mat-form-field appearance='outline' class='w-100'>
+                            <mat-label>Select Answer*</mat-label>
+                            <mat-select formControlName='answer'>
+                                <mat-option *ngIf='option1?.valid && (option1?.value)?.trim()!=""'
+                                    [value]='option1?.value'>{{option1?.value}}
+                                </mat-option>
+                                <mat-option *ngIf='option2?.valid && (option2?.value)?.trim()!=""'
+                                    [value]='option2?.value'>{{option2?.value}}
+                                </mat-option>
+                                <mat-option *ngIf='option3?.dirty && (option3?.value)?.trim()!=""'
+                                    [value]='option3?.value'>{{option3?.value}}
+                                </mat-option>
+                                <mat-option *ngIf='option4?.dirty && (option4?.value)?.trim()!=""'
+                                    [value]='option4?.value'>{{option4?.value}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <span *ngIf="answer?.invalid && answer?.touched"
+                            class="alert-danger form-control is-invalid">Please select a answer
+                        </span>
+
+
+                        <div class="container text-center">
+                            <button mat-mini-fab color='primary' type="submit" [disabled]='!addQuestion?.valid'>
+                                <mat-icon>add</mat-icon>
+                            </button>
+                            <button mat-mini-fab color='warn' class="mx-2" (click)="clear()">
+                                <mat-icon>clear</mat-icon>
+                            </button>
+                        </div>
+
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

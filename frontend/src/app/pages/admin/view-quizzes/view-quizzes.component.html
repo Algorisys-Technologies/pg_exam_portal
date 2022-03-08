@@ -1,0 +1,37 @@
+<div class="container text-center mt-4">
+    <button mat-mini-fab color='primary'  routerLink="/admin/add-quiz">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+
+<mat-card *ngFor="let q of quizzes" class="mt-2">
+    <mat-card-header>
+        <div mat-card-avatar class="header-image"></div>
+        <mat-card-title>
+            {{q?.title}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{q?.category?.title}}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>{{q?.description}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button [routerLink]="'/admin/view-questions/'+q.qId+'/'+q.title" mat-flat-button color="accent" class="mx-2">
+            Questions </button>
+        <button mat-stroked-button color="accent" class="mx-2"> Max Marks: {{q?.maxMarks}} </button>
+        <button mat-stroked-button color="accent" class="mx-2">Show Question: {{q?.numberOfQuestions}} </button>
+        <button mat-flat-button color="accent" class="mx-2"> Attempts </button>
+        <mat-slide-toggle class="mx-2" [checked]="q.active" [disabled]="true">publish me! </mat-slide-toggle>
+        <button mat-mini-fab color='accent' class="mx-2" [routerLink]="'/admin/quiz/'+ q?.qId">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-mini-fab color='warn' class="mx-2" (click)="removeQuiz(q.qId)">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-card-actions>
+</mat-card>
+
+
+
